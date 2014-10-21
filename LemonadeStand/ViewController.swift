@@ -57,6 +57,9 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         setupContainerViews()
         setupInventoryContainer(inventoryContainer)
+        setupPurchaseContainer(purchaseContainer)
+        setupMixContainer(mixContainer)
+        setupSellContainer(sellContainer)
     }
 
     override func didReceiveMemoryWarning() {
@@ -82,17 +85,110 @@ class ViewController: UIViewController {
     }
     
     func setupInventoryContainer(containerView: UIView) {
+        
         inventoryLabel = UILabel()
         inventoryLabel.text = "You have:"
         inventoryLabel.textColor = UIColor.redColor()
         inventoryLabel.frame = CGRectMake(10, 25, 100, 50)
         inventoryLabel.sizeToFit()
         containerView.addSubview(inventoryLabel)
+        
+        bank = UILabel()
+        bank.text = "$10"
+        bank.textColor = UIColor.greenColor()
+        bank.sizeToFit()
+        bank.center = CGPoint(x: containerView.frame.width / 2, y: containerView.frame.height / 4)
+        bank.textAlignment = NSTextAlignment.Center
+        containerView.addSubview(bank)
+        
+        lemonInventory = UILabel()
+        lemonInventory.text = "1 Lemons"
+        lemonInventory.sizeToFit()
+        lemonInventory.center = CGPoint(x: containerView.frame.width / 2, y: containerView.frame.height / 2)
+        lemonInventory.textAlignment = NSTextAlignment.Center
+        containerView.addSubview(lemonInventory)
+        
+        iceInventory = UILabel()
+        iceInventory.text = "1 Ice Cubes"
+        iceInventory.sizeToFit()
+        iceInventory.center = CGPoint(x: containerView.frame.width / 2, y: containerView.frame.height / 4 * 3)
+        containerView.addSubview(iceInventory)
     }
     
+    func setupPurchaseContainer(containerView: UIView) {
+        
+        purchaseSectionLabel = UILabel()
+        purchaseSectionLabel.text = "Step 1: Purchase Supplies"
+        purchaseSectionLabel.textColor = UIColor.blueColor()
+        purchaseSectionLabel.frame = CGRectMake(10, 25, 100, 50)
+        purchaseSectionLabel.sizeToFit()
+        containerView.addSubview(purchaseSectionLabel)
+        
+        lemonPriceLabel = UILabel()
+        lemonPriceLabel.text = "Lemons for $2:"
+        lemonPriceLabel.frame = CGRectMake(0, 0, containerView.frame.width / 2, containerView.frame.height / 4)
+        lemonPriceLabel.center = CGPoint(x: containerView.frame.width / 4, y: containerView.frame.height / 2)
+        lemonPriceLabel.textAlignment = NSTextAlignment.Right
+        containerView.addSubview(lemonPriceLabel)
+        
+        icePriceLabel = UILabel()
+        icePriceLabel.text = "Ice Cubes for $1:"
+        icePriceLabel.frame = CGRectMake(0, 0, containerView.frame.width / 2, containerView.frame.height / 4)
+        icePriceLabel.center = CGPoint(x: containerView.frame.width / 4, y: containerView.frame.height / 4 * 3)
+        icePriceLabel.textAlignment = NSTextAlignment.Right
+        containerView.addSubview(icePriceLabel)
+    }
     
+    func setupMixContainer(containerView: UIView) {
+        
+        mixSectionLabel = UILabel()
+        mixSectionLabel.text = "Step 2: Mix Your Lemonade"
+        mixSectionLabel.textColor = UIColor.blueColor()
+        mixSectionLabel.frame = CGRectMake(10, 25, 100, 50)
+        mixSectionLabel.sizeToFit()
+        containerView.addSubview(mixSectionLabel)
+        
+        lemonsInMixLabel = UILabel()
+        lemonsInMixLabel.text = "Lemons:"
+        lemonsInMixLabel.frame = CGRectMake(0, 0, containerView.frame.width / 2, containerView.frame.height / 4)
+        lemonsInMixLabel.center = CGPoint(x: containerView.frame.width / 4, y: containerView.frame.height / 2)
+        lemonsInMixLabel.textAlignment = NSTextAlignment.Right
+        containerView.addSubview(lemonsInMixLabel)
+        
+        iceInMixLabel = UILabel()
+        iceInMixLabel.text = "Ice Cubes:"
+        iceInMixLabel.frame = CGRectMake(0, 0, containerView.frame.width / 2, containerView.frame.height / 4)
+        iceInMixLabel.center = CGPoint(x: containerView.frame.width / 4, y: containerView.frame.height / 4 * 3)
+        iceInMixLabel.textAlignment = NSTextAlignment.Right
+        containerView.addSubview(iceInMixLabel)
+    }
     
-    
+    func setupSellContainer(containerView: UIView) {
+        
+        sellLabel = UILabel()
+        sellLabel.text = "Step 3: Start Selling Your Brew"
+        sellLabel.textColor = UIColor.blueColor()
+        sellLabel.frame = CGRectMake(10, 15, 100, 50)
+        sellLabel.sizeToFit()
+        containerView.addSubview(sellLabel)
+        
+        saleExplanationLabel = UILabel()
+        saleExplanationLabel.text = "At the end of the day you will either make or lose money. If you don't have enough money to buy new inventory then you lose the game."
+        saleExplanationLabel.font = UIFont(name: "Arial", size: 12)
+        saleExplanationLabel.sizeToFit()
+        saleExplanationLabel.frame = CGRectMake(10, 30, containerView.frame.width - 20, containerView.frame.height / 2)
+        saleExplanationLabel.numberOfLines = 0
+        containerView.addSubview(saleExplanationLabel)
+        
+        sellButton = UIButton()
+        sellButton.setTitle("Start Day", forState: UIControlState.Normal)
+        sellButton.setTitleColor(UIColor.blueColor(), forState: UIControlState.Normal)
+        sellButton.backgroundColor = UIColor.yellowColor()
+        sellButton.sizeToFit()
+        sellButton.center = CGPoint(x: containerView.frame.width / 2, y: containerView.frame.height / 4 * 3)
+        sellButton.addTarget(self, action: "sellButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
+        containerView.addSubview(sellButton)
+    }
     
     
     
