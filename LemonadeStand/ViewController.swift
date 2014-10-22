@@ -51,7 +51,9 @@ class ViewController: UIViewController {
     var iceToBeBought = 0
     var lemonsInMix = 0
     var iceInMix = 0
+    var results: ([Float]!, Weather!)
     var customers: [Float] = []
+    var weather = UIImageView()
     
     // Buttons
     
@@ -185,7 +187,10 @@ class ViewController: UIViewController {
             } else {
                 mix = Float(lemonsInMix / iceInMix)
             }
-            customers = Factory.createCustomers()
+            //customers = Factory.createCustomers().customers
+            results = Factory.createCustomers()
+            customers = results.0!
+            weather.image = results.1!.image
             sales = LemonadeBrain.determineSales(customers, mix: mix)
             bank += sales
             lemonsInMix = 0
@@ -233,6 +238,9 @@ class ViewController: UIViewController {
         bankLabel.textAlignment = NSTextAlignment.Center
         containerView.addSubview(bankLabel)
         
+        weather.frame = CGRectMake(10, 50, 100, 50)
+        containerView.addSubview(weather)
+            
         lemonInventoryLabel = UILabel()
         lemonInventoryLabel.text = "\(lemonInventory) Lemons"
         lemonInventoryLabel.sizeToFit()
