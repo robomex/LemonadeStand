@@ -177,6 +177,9 @@ class ViewController: UIViewController {
     
     func sellButtonPressed (button: UIButton) {
         
+        removeWeatherImageViews()
+        setupInventoryContainer(inventoryContainer)
+        
         if lemonsInMix == 0 {
             showAlertWithText(header: "No one wants that shit", message: "Mix in some lemons, idiot")
         } else {
@@ -435,7 +438,15 @@ class ViewController: UIViewController {
         presentViewController(alert, animated: true, completion: nil)
     }
     
-    
+    func removeWeatherImageViews () {
+        if inventoryContainer != nil {
+            let container: UIView? = inventoryContainer!
+            let subViews: Array? = container!.subviews
+            for view in subViews! {
+                view.removeFromSuperview()
+            }
+        }
+    }
     
     
     
